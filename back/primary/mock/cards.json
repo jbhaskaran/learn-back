@@ -1,0 +1,88 @@
+[
+  {
+    "id": 1,
+    "userId": 1,
+    "name": "Hello World",
+    "description": "Modify the code to return the string 'Hello World!'.",
+    "code": "const HelloWorld = () => {\n  return '';\n}",
+    "tags": ["Javascript", "Exercise"],
+    "level": "Beginner",
+    "component": "JavascriptExercise",
+    "fnName": "HelloWorld",
+    "tests": [
+      {
+        "assert": "equals",
+        "string": "Hello World!"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "userId": 1,
+    "name": "Expressions",
+    "description": "Modify the code to print <h1>Hello, [your name]</h1>.",
+    "code": "const name = 'Jeff Decker';\nconst element = <h1>Hello, {name}</h1>;\n\nconst HelloWorld = () => {\n  return <>{element}</>;\n}",
+    "tags": ["React", "Exercise"],
+    "level": "Beginner",
+    "component": "ReactExercise",
+    "fnName": "HelloWorld",
+    "tests": [
+      {
+        "assert": "matches",
+        "string": "<h1>Hello, [a-zA-Z. ]+</h1>"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "userId": 1,
+    "name": "Hello World",
+    "description": "Modify the function HelloWorld to return <h1>Hello World!</h1>.",
+    "code": "const HelloWorld = () => {\n  return (<span>Talk Later!</span>);\n}",
+    "tags": ["React", "Exercise"],
+    "level": "Beginner",
+    "component": "ReactExercise",
+    "fnName": "HelloWorld",
+    "tests": [
+      {
+        "assert": "equals",
+        "string": "<h1>Hello World!</h1>"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "userId": 1,
+    "name": "Function Components",
+    "description": "Modify the function Welcome to return <h1>Welcome to my home, {name}.</h1>.",
+    "code": "const Welcome = (props) => {\n  return (<span>Welcome...</span>);\n}",
+    "tags": ["React", "Exercise"],
+    "level": "Beginner",
+    "component": "ReactExercise",
+    "fnName": "Welcome",
+    "tests": [
+      {
+        "assert": "matches",
+        "string": "<h1>Welcome to my home, [a-zA-Z. ]+</h1>",
+        "props": { "name": "Jeff Decker" }
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "userId": 1,
+    "name": "Javascript Fundamentals Quiz",
+    "tags": ["Javascript", "Quiz"],
+    "level": "Beginner",
+    "component": "Quiz"
+  },
+  {
+    "id": 6,
+    "userId": 1,
+    "name": "Youtube Video",
+    "tags": ["Javascript", "Youtube"],
+    "level": "Beginner",
+    "component": "Youtube",
+    "description": "Embedded youtube url code is what you see here"
+  }
+]

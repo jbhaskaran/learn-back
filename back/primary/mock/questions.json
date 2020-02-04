@@ -1,0 +1,145 @@
+[
+  {
+    "cardId": 4,
+    "question": "Javascript is a prototype based language?",
+    "answer": 0,
+    "choices": [
+      {
+        "description": "True"
+      },
+      {
+        "description": "False"
+      }
+    ]
+  },
+  {
+    "cardId": 4,
+    "question": "The let keyword is block scope?",
+    "answer": 0,
+    "choices": [
+      {
+        "description": "True"
+      },
+      {
+        "description": "False"
+      }
+    ]
+  },
+  {
+    "cardId": 4,
+    "question": "Javascript runs in any major browser such as Firefox or Chrome?",
+    "answer": 0,
+    "choices": [
+      {
+        "description": "True"
+      },
+      {
+        "description": "False"
+      }
+    ]
+  },
+  {
+    "cardId": 4,
+    "question": "Array is a primitive data type in Javascript?",
+    "answer": 1,
+    "choices": [
+      {
+        "description": "True"
+      },
+      {
+        "description": "False"
+      }
+    ]
+  },
+  {
+    "cardId": 4,
+    "question": "Number, Boolean, String, and Date are the primitive data types in Javascript?",
+    "answer": 1,
+    "choices": [
+      {
+        "description": "True"
+      },
+      {
+        "description": "False"
+      }
+    ]
+  },
+  {
+    "cardId": 4,
+    "question": "Declaring variables with var keyword is preferred over const and let?",
+    "answer": 1,
+    "choices": [
+      {
+        "description": "True"
+      },
+      {
+        "description": "False"
+      }
+    ]
+  },
+  {
+    "cardId": 4,
+    "question": "Javascript can only run in the Chrome browser?",
+    "answer": 1,
+    "choices": [
+      {
+        "description": "True"
+      },
+      {
+        "description": "False"
+      }
+    ]
+  },
+  {
+    "cardId": 4,
+    "question": "You will use Javascript to make your web page dynamic or interactive?",
+    "answer": 0,
+    "choices": [
+      {
+        "description": "True"
+      },
+      {
+        "description": "False"
+      }
+    ]
+  },
+  {
+    "cardId": 4,
+    "question": "The break keyword when used in a loop will cause the loop to be terminated and continue with the code after the loop?",
+    "answer": 0,
+    "choices": [
+      {
+        "description": "True"
+      },
+      {
+        "description": "False"
+      }
+    ]
+  },
+  {
+    "cardId": 4,
+    "question": "The continue keyword is a way to exit the current iteration of a loop?",
+    "answer": 0,
+    "choices": [
+      {
+        "description": "True"
+      },
+      {
+        "description": "False"
+      }
+    ]
+  },
+  {
+    "cardId": 4,
+    "question": "'use strict' is a way to protect your script from copyright infringement?",
+    "answer": 1,
+    "choices": [
+      {
+        "description": "True"
+      },
+      {
+        "description": "False"
+      }
+    ]
+  }
+]

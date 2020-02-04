@@ -1,0 +1,25 @@
+# Use root/example as user/password credentials
+version: '3.1'
+
+services:
+  sqs:
+    image: roribio16/alpine-sqs:latest
+    restart: always
+    ports:
+      - 9325:9325
+      - 9324:9324
+
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+
+  dynamodb:
+    image: amazon/dynamodb-local:latest
+    restart: always
+    ports:
+      - 8000:8000

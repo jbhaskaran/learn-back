@@ -1,0 +1,28 @@
+{
+  "name": "@glueit/back-learn",
+  "version": "0.0.0",
+  "description": "Glue It - Learning Platform - Back End",
+  "scripts": {
+    "start": "messhall start",
+    "lint-prettier": "eslint . --fix && pretty-quick --staged",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jeff Decker",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@glueit/back": "0.0.66",
+    "@glueit/eslint-config": "0.0.3",
+    "@glueit/prettier-config": "0.0.2",
+    "aws-sdk": "^2.602.0",
+    "mysql": "^2.18.0"
+  },
+  "eslintConfig": {
+    "extends": "@glueit/eslint-config"
+  },
+  "prettier": "@glueit/prettier-config",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint-prettier"
+    }
+  }
+}

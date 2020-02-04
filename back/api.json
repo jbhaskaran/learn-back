@@ -1,0 +1,904 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "0.0.1",
+    "title": "Learn API",
+    "license": {
+      "name": "MIT"
+    }
+  },
+  "back": {
+    "base": "/api"
+  },
+  "paths": {
+    "/users/:userId/cards": {
+      "get": {
+        "summary": "List all cards belonging to a user",
+        "back": {
+          "authorize": false
+        },
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authentication",
+            "description": "Bearer token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "_start",
+            "description": "Starting position of the items to return",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "_limit",
+            "description": "Limit the number of items to return",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Valid input response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/UsersArray"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {}
+          }
+        },
+        "x-amazon-apigateway-request-validators": {
+          "basic": {
+            "validateRequestParameters": true
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "type": "aws_proxy",
+          "httpMethod": "POST",
+          "uri": "arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:422105039824:function:BackLambda/invocations",
+          "passthroughBehavior": "when_no_match"
+        }
+      }
+    },
+    "/users/:userId/verifications": {
+      "put": {
+        "summary": "Resend verification code of user.",
+        "consumes": ["application/json"],
+        "back": {
+          "authorize": ["isLoggedIn", "notVerifiedEmail"]
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "",
+            "required": false,
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Valid input response"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "401": {
+            "description": "Not authorized (credentials provided do not match)",
+            "content": {}
+          }
+        },
+        "x-amazon-apigateway-request-validators": {
+          "basic": {
+            "validateRequestParameters": true
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "type": "aws_proxy",
+          "httpMethod": "POST",
+          "uri": "arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:422105039824:function:BackLambda/invocations",
+          "passthroughBehavior": "when_no_match"
+        }
+      }
+    },
+    "/cards/:cardId": {
+      "get": {
+        "summary": "Get specific card.",
+        "back": {
+          "authorize": false
+        },
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authentication",
+            "description": "Bearer token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "_start",
+            "description": "Starting position of the items to return",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "_limit",
+            "description": "Limit the number of items to return",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Valid input response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/UsersArray"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {}
+          }
+        },
+        "x-amazon-apigateway-request-validators": {
+          "basic": {
+            "validateRequestParameters": true
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "type": "aws_proxy",
+          "httpMethod": "POST",
+          "uri": "arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:422105039824:function:BackLambda/invocations",
+          "passthroughBehavior": "when_no_match"
+        }
+      }
+    },
+    "/cards": {
+      "get": {
+        "summary": "List all cards",
+        "back": {
+          "authorize": false
+        },
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authentication",
+            "description": "Bearer token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "_start",
+            "description": "Starting position of the items to return",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "_limit",
+            "description": "Limit the number of items to return",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Valid input response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/UsersArray"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {}
+          }
+        },
+        "x-amazon-apigateway-request-validators": {
+          "basic": {
+            "validateRequestParameters": true
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "type": "aws_proxy",
+          "httpMethod": "POST",
+          "uri": "arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:422105039824:function:BackLambda/invocations",
+          "passthroughBehavior": "when_no_match"
+        }
+      },
+      "put": {
+        "summary": "Update an existing card",
+        "consumes": ["application/json"],
+        "back": {
+          "authorize": ["isLoggedIn", "isOwnerOfObject"]
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Cards object.",
+            "required": true,
+            "schema": {
+              "name": {
+                "required": true,
+                "type": "string"
+              },
+              "tags": {
+                "required": true,
+                "type": "object"
+              },
+              "level": {
+                "required": true,
+                "type": "string"
+              },
+              "component": {
+                "required": true,
+                "type": "string"
+              },
+              "meta": {
+                "required": true,
+                "type": "object"
+              },
+              "id": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Valid input response"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "401": {
+            "description": "Not authorized (credentials provided do not match)",
+            "content": {}
+          }
+        },
+        "x-amazon-apigateway-request-validators": {
+          "basic": {
+            "validateRequestParameters": true
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "type": "aws_proxy",
+          "httpMethod": "POST",
+          "uri": "arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:422105039824:function:BackLambda/invocations",
+          "passthroughBehavior": "when_no_match"
+        }
+      },
+      "post": {
+        "summary": "Create new cards(s)",
+        "consumes": ["application/json"],
+        "back": {
+          "authorize": ["isLoggedIn", "hasVerifiedEmail"],
+          "decorators": ["id", { "name": "userId", "decorator": "id" }]
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Users object.",
+            "required": true,
+            "schema": {
+              "name": {
+                "required": true,
+                "type": "string"
+              },
+              "tags": {
+                "required": true,
+                "type": "object"
+              },
+              "level": {
+                "required": true,
+                "type": "string"
+              },
+              "component": {
+                "required": true,
+                "type": "string"
+              },
+              "meta": {
+                "required": true,
+                "type": "object"
+              },
+              "userId": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Valid input response"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "401": {
+            "description": "Not authorized (credentials provided do not match)",
+            "content": {}
+          }
+        },
+        "x-amazon-apigateway-request-validators": {
+          "basic": {
+            "validateRequestParameters": true
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "type": "aws_proxy",
+          "httpMethod": "POST",
+          "uri": "arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:422105039824:function:BackLambda/invocations",
+          "passthroughBehavior": "when_no_match"
+        }
+      },
+      "options": {
+        "tags": ["CORS"],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/Empty"
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "type": "string"
+              },
+              "Access-Control-Allow-Methods": {
+                "type": "string"
+              },
+              "Access-Control-Allow-Headers": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "responses": {
+            "default": {
+              "statusCode": 200,
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Methods": "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token,x-requested-with'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              }
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "requestTemplates": {
+            "application/json": "{\"statusCode\": 200}"
+          },
+          "type": "mock"
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "summary": "Create new user(s)",
+        "consumes": ["application/json"],
+        "back": {
+          "authorize": ["notLoggedIn"],
+          "decorators": ["id", "password"]
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Users object.",
+            "required": true,
+            "schema": {
+              "email": {
+                "required": true,
+                "notExists": true,
+                "type": "string"
+              },
+              "password": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Valid input response"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "401": {
+            "description": "Not authorized (credentials provided do not match)",
+            "content": {}
+          }
+        },
+        "x-amazon-apigateway-request-validators": {
+          "basic": {
+            "validateRequestParameters": true
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "type": "aws_proxy",
+          "httpMethod": "POST",
+          "uri": "arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:422105039824:function:BackLambda/invocations",
+          "passthroughBehavior": "when_no_match"
+        }
+      },
+      "put": {
+        "summary": "Update an existing user",
+        "consumes": ["application/json"],
+        "back": {
+          "decorators": ["password"],
+          "authorize": ["isLoggedIn", "isOwnerOfObject"]
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Users object.",
+            "required": true,
+            "schema": {
+              "id": {
+                "required": true,
+                "type": "string"
+              },
+              "email": {
+                "required": true,
+                "unique": true,
+                "type": "string"
+              },
+              "password": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Valid input response"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "401": {
+            "description": "Not authorized (credentials provided do not match)",
+            "content": {}
+          }
+        },
+        "x-amazon-apigateway-request-validators": {
+          "basic": {
+            "validateRequestParameters": true
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "type": "aws_proxy",
+          "httpMethod": "POST",
+          "uri": "arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:422105039824:function:BackLambda/invocations",
+          "passthroughBehavior": "when_no_match"
+        }
+      },
+      "options": {
+        "tags": ["CORS"],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/Empty"
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "type": "string"
+              },
+              "Access-Control-Allow-Methods": {
+                "type": "string"
+              },
+              "Access-Control-Allow-Headers": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "responses": {
+            "default": {
+              "statusCode": 200,
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Methods": "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token,x-requested-with'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              }
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "requestTemplates": {
+            "application/json": "{\"statusCode\": 200}"
+          },
+          "type": "mock"
+        }
+      }
+    },
+    "/tags": {
+      "get": {
+        "summary": "Find tags",
+        "back": {
+          "authorize": false
+        },
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authentication",
+            "description": "Bearer token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "_start",
+            "description": "Starting position of the items to return",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "_limit",
+            "description": "Limit the number of items to return",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Valid input response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/UsersArray"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {}
+          }
+        },
+        "x-amazon-apigateway-request-validators": {
+          "basic": {
+            "validateRequestParameters": true
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "type": "aws_proxy",
+          "httpMethod": "POST",
+          "uri": "arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:422105039824:function:BackLambda/invocations",
+          "passthroughBehavior": "when_no_match"
+        }
+      },
+      "options": {
+        "tags": ["CORS"],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/Empty"
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "type": "string"
+              },
+              "Access-Control-Allow-Methods": {
+                "type": "string"
+              },
+              "Access-Control-Allow-Headers": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "responses": {
+            "default": {
+              "statusCode": 200,
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Methods": "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token,x-requested-with'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              }
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "requestTemplates": {
+            "application/json": "{\"statusCode\": 200}"
+          },
+          "type": "mock"
+        }
+      }
+    },
+    "/verifications/:verificationCode": {
+      "put": {
+        "summary": "Verify (email) of an existing user",
+        "consumes": ["application/json"],
+        "back": {
+          "idName": "verificationCode",
+          "objectName": "users",
+          "authorize": ["notVerifiedEmail"]
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "",
+            "required": false,
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Valid input response"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "401": {
+            "description": "Not authorized (credentials provided do not match)",
+            "content": {}
+          }
+        },
+        "x-amazon-apigateway-request-validators": {
+          "basic": {
+            "validateRequestParameters": true
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "type": "aws_proxy",
+          "httpMethod": "POST",
+          "uri": "arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:422105039824:function:BackLambda/invocations",
+          "passthroughBehavior": "when_no_match"
+        }
+      }
+    },
+    "/passwordResets/:passwordResetCode": {
+      "put": {
+        "summary": "Verify (email) of an existing user",
+        "consumes": ["application/json"],
+        "back": {
+          "idName": "passwordResetCode",
+          "objectName": "users",
+          "authorize": ["notLoggedIn"]
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "",
+            "required": false,
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Valid input response"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "401": {
+            "description": "Not authorized (credentials provided do not match)",
+            "content": {}
+          }
+        },
+        "x-amazon-apigateway-request-validators": {
+          "basic": {
+            "validateRequestParameters": true
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "type": "aws_proxy",
+          "httpMethod": "POST",
+          "uri": "arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:422105039824:function:BackLambda/invocations",
+          "passthroughBehavior": "when_no_match"
+        }
+      }
+    },
+    "/passwordResets": {
+      "put": {
+        "summary": "Send the anonymous user a new password reset email.",
+        "consumes": ["application/json"],
+        "back": {
+          "idName": "email",
+          "objectName": "users",
+          "authorize": ["notLoggedIn"]
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "",
+            "required": false,
+            "schema": {
+              "email": {
+                "required": true,
+                "exists": true,
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Valid input response"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "401": {
+            "description": "Not authorized (credentials provided do not match)",
+            "content": {}
+          }
+        },
+        "x-amazon-apigateway-request-validators": {
+          "basic": {
+            "validateRequestParameters": true
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "type": "aws_proxy",
+          "httpMethod": "POST",
+          "uri": "arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:422105039824:function:BackLambda/invocations",
+          "passthroughBehavior": "when_no_match"
+        }
+      }
+    },
+    "/sessions": {
+      "post": {
+        "summary": "Create a new session",
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Sessions object with credentials for login.",
+            "required": true,
+            "schema": {
+              "email": {
+                "required": true,
+                "type": "string"
+              },
+              "password": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Valid input response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Tokens"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "401": {
+            "description": "Not authorized (credentials provided do not match)",
+            "content": {}
+          }
+        },
+        "back": {
+          "authorize": ["notLoggedIn"],
+          "pathHandler": "authenticate"
+        },
+        "x-amazon-apigateway-request-validators": {
+          "basic": {
+            "validateRequestParameters": true
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "type": "aws_proxy",
+          "httpMethod": "POST",
+          "uri": "arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:422105039824:function:BackLambda/invocations",
+          "passthroughBehavior": "when_no_match"
+        }
+      },
+      "options": {
+        "tags": ["CORS"],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/Empty"
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "type": "string"
+              },
+              "Access-Control-Allow-Methods": {
+                "type": "string"
+              },
+              "Access-Control-Allow-Headers": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "responses": {
+            "default": {
+              "statusCode": 200,
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Methods": "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token,x-requested-with'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              }
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "requestTemplates": {
+            "application/json": "{\"statusCode\": 200}"
+          },
+          "type": "mock"
+        }
+      }
+    }
+  }
+}
