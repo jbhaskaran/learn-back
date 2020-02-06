@@ -1,9 +1,26 @@
+const isSameCard = (card, object) => {
+  if (card.level !== object.level) {
+    return false
+  } else if (card.name !== object.name) {
+    return false
+  } else if (card.tags.length !== object.tags.length) {
+    return false
+  }
+  return card.tags.every(tag => {
+    return object.tags.indexOf(tag) !== -1
+  })
+}
+
 const handleCard = async ({ name, object, store }) => {
   const storeName = 'cardEditQueue'
   let id = object.id
   const updatedTime = new Date().toISOString()
   const card = await store.get({ name, id: object.id, idName: 'id', query: {} })
   if (card) {
+    // Do this to prevent unneeded dynamodb delete/updates
+    if (isSameCard(card, object)) {
+      return
+    }
     object.meta.updatedTime = updatedTime
     const sqsMessage = {
       queueName: 'CardEditQueue',
