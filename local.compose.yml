@@ -4,6 +4,7 @@ version: '3.1'
 services:
   lambda:
     image: lambci/lambda:nodejs12.x
+
   sqs:
     image: roribio16/alpine-sqs:latest
     restart: always

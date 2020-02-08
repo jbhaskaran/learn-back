@@ -16,6 +16,7 @@ const handleCard = async ({ name, object, store }) => {
   let id = object.id
   const updatedTime = new Date().toISOString()
   const card = await store.get({ name, id: object.id, idName: 'id', query: {} })
+  object.meta.updatedTime = card.meta.updatedTime
   if (card) {
     // Do this to prevent unneeded dynamodb delete/updates
     if (isSameCard(card, object)) {
