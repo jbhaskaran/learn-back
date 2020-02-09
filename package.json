@@ -1,6 +1,6 @@
 {
   "name": "@glueit/learn-back",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Glue It - Learning Platform - Back End",
   "scripts": {
     "start": "messhall start",
