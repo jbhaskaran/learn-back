@@ -10,7 +10,7 @@
   "author": "Jeff Decker",
   "license": "UNLICENSED",
   "dependencies": {
-    "@glueit/back": "0.0.66",
+    "@glueit/back": "0.0.67",
     "@glueit/eslint-config": "0.0.3",
     "@glueit/prettier-config": "0.0.2",
     "aws-sdk": "^2.602.0",
