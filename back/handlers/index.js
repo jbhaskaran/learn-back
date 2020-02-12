@@ -7,6 +7,7 @@ const cardsPost = require('./cardsPost')
 const cardsPut = require('./cardsPut')
 const cardsGet = require('./cardsGet')
 const tagsGet = require('./tagsGet')
+const integrationsFacebookPost = require('./integrationsFacebookPost')
 
 module.exports = {
   usersPost,
@@ -17,5 +18,6 @@ module.exports = {
   cardsPost,
   cardsPut,
   cardsGet,
-  tagsGet
+  tagsGet,
+  integrationsFacebookPost
 }

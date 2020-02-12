@@ -899,6 +899,130 @@
           "type": "mock"
         }
       }
+    },
+    "/integrations/facebook": {
+      "get": {
+        "summary": "Get facebook user",
+        "back": {
+          "objectName": "users",
+          "authorize": ["notLoggedIn"]
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Valid input response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/UsersArray"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {}
+          }
+        },
+        "x-amazon-apigateway-request-validators": {
+          "basic": {
+            "validateRequestParameters": true
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "type": "aws_proxy",
+          "httpMethod": "POST",
+          "uri": "arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:422105039824:function:BackLambda/invocations",
+          "passthroughBehavior": "when_no_match"
+        }
+      },
+      "post": {
+        "summary": "Create new facebook user(s)",
+        "consumes": ["application/json"],
+        "back": {
+          "objectName": "users",
+          "authorize": ["notLoggedIn"],
+          "decorators": ["id"]
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Users object.",
+            "required": true,
+            "schema": {
+              "email": {
+                "required": true,
+                "type": "string"
+              },
+              "password": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Valid input response"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        },
+        "x-amazon-apigateway-request-validators": {
+          "basic": {
+            "validateRequestParameters": true
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "type": "aws_proxy",
+          "httpMethod": "POST",
+          "uri": "arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:422105039824:function:BackLambda/invocations",
+          "passthroughBehavior": "when_no_match"
+        }
+      },
+      "options": {
+        "tags": ["CORS"],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/Empty"
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "type": "string"
+              },
+              "Access-Control-Allow-Methods": {
+                "type": "string"
+              },
+              "Access-Control-Allow-Headers": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "responses": {
+            "default": {
+              "statusCode": 200,
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Methods": "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token,x-requested-with'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              }
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "requestTemplates": {
+            "application/json": "{\"statusCode\": 200}"
+          },
+          "type": "mock"
+        }
+      }
     }
   }
 }
