@@ -4,23 +4,27 @@ const integrationsFacebookPost = async ({
   object,
   store
 }) => {
-  const { email } = object
+  const { id, email } = object
+  const provider = 'FACEBOOK'
   if (!email) {
     context.status = 401
     return false
   }
-  const query = { email }
+  const query = { email, provider }
   const users = await store.get({ name, query })
   const user = users[0]
   if (user) {
     context.status = 200
     context.body = {
-      user: { email: user.email, verified: user.verified, id: user.id }
+      user: { email: user.email, id: user.id, provider: user.provider }
     }
   } else {
-    object.verified = true
-    console.log(object)
+    object.provider = provider
     await store.add({ name, object })
+    context.status = 201
+    context.body = {
+      user: { email, id, provider }
+    }
   }
   return false
 }

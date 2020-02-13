@@ -85,6 +85,32 @@ module.exports = [
             length: 128
           }
         ]
+      },
+      {
+        action: 'createObject',
+        name: 'integrations',
+        properties: [
+          {
+            name: 'id',
+            type: 'string',
+            length: 50
+          },
+          {
+            name: 'email',
+            type: 'string',
+            length: 100
+          },
+          {
+            name: 'provider',
+            type: 'string',
+            length: 25
+          },
+          {
+            name: 'active',
+            type: 'boolean',
+            default: true
+          }
+        ]
       }
     ]
   }

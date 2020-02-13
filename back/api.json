@@ -901,61 +901,25 @@
       }
     },
     "/integrations/facebook": {
-      "get": {
-        "summary": "Get facebook user",
-        "back": {
-          "objectName": "users",
-          "authorize": ["notLoggedIn"]
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Valid input response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/definitions/UsersArray"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Not authorized",
-            "content": {}
-          }
-        },
-        "x-amazon-apigateway-request-validators": {
-          "basic": {
-            "validateRequestParameters": true
-          }
-        },
-        "x-amazon-apigateway-integration": {
-          "type": "aws_proxy",
-          "httpMethod": "POST",
-          "uri": "arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:422105039824:function:BackLambda/invocations",
-          "passthroughBehavior": "when_no_match"
-        }
-      },
       "post": {
         "summary": "Create new facebook user(s)",
         "consumes": ["application/json"],
         "back": {
-          "objectName": "users",
-          "authorize": ["notLoggedIn"],
-          "decorators": ["id"]
+          "objectName": "integrations",
+          "authorize": ["notLoggedIn"]
         },
         "parameters": [
           {
             "in": "body",
             "name": "body",
-            "description": "Users object.",
+            "description": "Integrations object.",
             "required": true,
             "schema": {
               "email": {
                 "required": true,
                 "type": "string"
               },
-              "password": {
+              "id": {
                 "required": true,
                 "type": "string"
               }
